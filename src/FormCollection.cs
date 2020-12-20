@@ -57,42 +57,42 @@ namespace gInk
 			PrimaryTop = Screen.PrimaryScreen.Bounds.Top - SystemInformation.VirtualScreen.Top;
 
 			gpButtons.Height = (int)(Screen.PrimaryScreen.Bounds.Height * Root.ToolbarHeight);
-			btClear.Height = (int)(gpButtons.Height * 0.85);
+			btClear.Height = (int)(gpButtons.Height * 0.88);
 			btClear.Width = btClear.Height;
-			btClear.Top = (int)(gpButtons.Height * 0.08);
-			btDock.Height = (int)(gpButtons.Height * 0.85);
-			btDock.Width = btDock.Height / 2;
-			btDock.Top = (int)(gpButtons.Height * 0.08);
-			btEraser.Height = (int)(gpButtons.Height * 0.85);
+			btClear.Top = (int)(gpButtons.Height * 0.07);
+			btDock.Height = (int)(gpButtons.Height * 0.88);
+			btDock.Width = (int)(btDock.Height * 0.75);
+			btDock.Top = (int)(gpButtons.Height * 0.07);
+			btEraser.Height = (int)(gpButtons.Height * 0.88);
 			btEraser.Width = btEraser.Height;
-			btEraser.Top = (int)(gpButtons.Height * 0.08);
-			btInkVisible.Height = (int)(gpButtons.Height * 0.85);
+			btEraser.Top = (int)(gpButtons.Height * 0.07);
+			btInkVisible.Height = (int)(gpButtons.Height * 0.88);
 			btInkVisible.Width = btInkVisible.Height;
-			btInkVisible.Top = (int)(gpButtons.Height * 0.08);
-			btPan.Height = (int)(gpButtons.Height * 0.85);
+			btInkVisible.Top = (int)(gpButtons.Height * 0.07);
+			btPan.Height = (int)(gpButtons.Height * 0.88);
 			btPan.Width = btPan.Height;
-			btPan.Top = (int)(gpButtons.Height * 0.08);
-			btPointer.Height = (int)(gpButtons.Height * 0.85);
+			btPan.Top = (int)(gpButtons.Height * 0.07);
+			btPointer.Height = (int)(gpButtons.Height * 0.88);
 			btPointer.Width = btPointer.Height;
-			btPointer.Top = (int)(gpButtons.Height * 0.08);
-			btSnap.Height = (int)(gpButtons.Height * 0.85);
+			btPointer.Top = (int)(gpButtons.Height * 0.07);
+			btSnap.Height = (int)(gpButtons.Height * 0.88);
 			btSnap.Width = btSnap.Height;
-			btSnap.Top = (int)(gpButtons.Height * 0.08);
-			btStop.Height = (int)(gpButtons.Height * 0.85);
+			btSnap.Top = (int)(gpButtons.Height * 0.07);
+			btStop.Height = (int)(gpButtons.Height * 0.88);
 			btStop.Width = btStop.Height;
-			btStop.Top = (int)(gpButtons.Height * 0.08);
-			btUndo.Height = (int)(gpButtons.Height * 0.85);
+			btStop.Top = (int)(gpButtons.Height * 0.07);
+			btUndo.Height = (int)(gpButtons.Height * 0.88);
 			btUndo.Width = btUndo.Height;
-			btUndo.Top = (int)(gpButtons.Height * 0.08);
+			btUndo.Top = (int)(gpButtons.Height * 0.07);
 
 			btPen = new Button[Root.MaxPenCount];
 
-			int cumulatedleft = (int)(btDock.Width * 2.5);
+			int cumulatedleft = (int)(btStop.Width * 1.2);
 			for (int b = 0; b < Root.MaxPenCount; b++)
 			{
 				btPen[b] = new Button();
-				btPen[b].Width = (int)(gpButtons.Height * 0.85);
-				btPen[b].Height = (int)(gpButtons.Height * 0.85);
+				btPen[b].Width = (int)(gpButtons.Height * 0.88);
+				btPen[b].Height = (int)(gpButtons.Height * 0.88);
 				btPen[b].Top = (int)(gpButtons.Height * 0.08);
 				btPen[b].FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
 				btPen[b].FlatAppearance.BorderSize = 3;
@@ -106,7 +106,7 @@ namespace gInk
 				btPen[b].FlatAppearance.MouseDownBackColor = Root.PenAttr[b].Color;
 				btPen[b].FlatAppearance.MouseOverBackColor = Root.PenAttr[b].Color;
 
-				this.toolTip.SetToolTip(this.btPen[b], Root.Local.ButtonNamePen[b]);
+				this.toolTip.SetToolTip(this.btPen[b], Root.Local.ButtonNamePen[b] + " (" + Root.Hotkey_Pens[b].ToString() + ")");
 
 				btPen[b].MouseDown += gpButtons_MouseDown;
 				btPen[b].MouseMove += gpButtons_MouseMove;
@@ -125,7 +125,7 @@ namespace gInk
 					btPen[b].Visible = false;
 				}
 			}
-			cumulatedleft += (int)(btDock.Width * 1.5);
+			cumulatedleft += (int)(btStop.Width * 0.8);
 			if (Root.EraserEnabled)
 			{
 				btEraser.Visible = true;
@@ -156,7 +156,7 @@ namespace gInk
 			{
 				btPointer.Visible = false;
 			}
-			cumulatedleft += (int)(btDock.Width * 1.5);
+			cumulatedleft += (int)(btStop.Width * 0.8);
 			if (Root.PenWidthEnabled)
 			{
 				btPenWidth.Visible = true;
@@ -207,9 +207,9 @@ namespace gInk
 			{
 				btClear.Visible = false;
 			}
-			cumulatedleft += (int)(btDock.Width * 1.5);
+			cumulatedleft += (int)(btStop.Width * 0.8);
 			btStop.Left = cumulatedleft;
-			gpButtons.Width = btStop.Right + btDock.Width;
+			gpButtons.Width = btStop.Right + (int)(btStop.Width * 0.5);
 			
 
 			this.Left = SystemInformation.VirtualScreen.Left;
@@ -403,14 +403,14 @@ namespace gInk
 
 			this.toolTip.SetToolTip(this.btDock, Root.Local.ButtonNameDock);
 			this.toolTip.SetToolTip(this.btPenWidth, Root.Local.ButtonNamePenwidth);
-			this.toolTip.SetToolTip(this.btEraser, Root.Local.ButtonNameErasor);
-			this.toolTip.SetToolTip(this.btPan, Root.Local.ButtonNamePan);
-			this.toolTip.SetToolTip(this.btPointer, Root.Local.ButtonNameMousePointer);
-			this.toolTip.SetToolTip(this.btInkVisible, Root.Local.ButtonNameInkVisible);
-			this.toolTip.SetToolTip(this.btSnap, Root.Local.ButtonNameSnapshot);
-			this.toolTip.SetToolTip(this.btUndo, Root.Local.ButtonNameUndo);
-			this.toolTip.SetToolTip(this.btClear, Root.Local.ButtonNameClear);
-			this.toolTip.SetToolTip(this.btStop, Root.Local.ButtonNameExit);
+			this.toolTip.SetToolTip(this.btEraser, Root.Local.ButtonNameErasor + " (" + Root.Hotkey_Eraser.ToString() + ")");
+			this.toolTip.SetToolTip(this.btPan, Root.Local.ButtonNamePan + " (" + Root.Hotkey_Pan.ToString() + ")");
+			this.toolTip.SetToolTip(this.btPointer, Root.Local.ButtonNameMousePointer + " (" + Root.Hotkey_Pointer.ToString() + ")");
+			this.toolTip.SetToolTip(this.btInkVisible, Root.Local.ButtonNameInkVisible + " (" + Root.Hotkey_InkVisible.ToString() + ")");
+			this.toolTip.SetToolTip(this.btSnap, Root.Local.ButtonNameSnapshot + " (" + Root.Hotkey_Snap.ToString() + ")");
+			this.toolTip.SetToolTip(this.btUndo, Root.Local.ButtonNameUndo + " (" + Root.Hotkey_Undo.ToString() + ")");
+			this.toolTip.SetToolTip(this.btClear, Root.Local.ButtonNameClear + " (" + Root.Hotkey_Clear.ToString() + ")");
+			this.toolTip.SetToolTip(this.btStop, Root.Local.ButtonNameExit + " (ESC)");
 		}
 
 		private void IC_Stroke(object sender, InkCollectorStrokeEventArgs e)
@@ -1112,22 +1112,19 @@ namespace gInk
 				// ESC key : Exit
 				short retVal;
 				retVal = GetKeyState(27);
-				if ((retVal & 0x8000) == 0x8000)
+				if ((retVal & 0x8000) == 0x8000 && (LastESCStatus & 0x8000) == 0x0000)
 				{
-					if ((LastESCStatus & 0x8000) == 0x0000)
+					if (Root.Snapping > 0)
 					{
-						if (Root.Snapping > 0)
-						{
-							ExitSnapping();
-						}
-						else if (Root.gpPenWidthVisible)
-						{
-							Root.gpPenWidthVisible = false;
-							Root.UponSubPanelUpdate = true;
-						}
-						else if (Root.Snapping == 0)
-							RetreatAndExit();
+						ExitSnapping();
 					}
+					else if (Root.gpPenWidthVisible)
+					{
+						Root.gpPenWidthVisible = false;
+						Root.UponSubPanelUpdate = true;
+					}
+					else if (Root.Snapping == 0)
+						RetreatAndExit();
 				}
 				LastESCStatus = retVal;
 			}
@@ -1439,6 +1436,32 @@ namespace gInk
 			}
 
 			SelectPen(-3);
+		}
+
+		short LastF4Status = 0;
+		private void FormCollection_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			// check if F4 key is pressed and we assume it's Alt+F4
+			short retVal = GetKeyState(0x73);
+			if ((retVal & 0x8000) == 0x8000 && (LastF4Status & 0x8000) == 0x0000)
+			{
+				e.Cancel = true;
+
+				// the following block is copyed from tiSlide_Tick() where we check whether ESC is pressed
+				if (Root.Snapping > 0)
+				{
+					ExitSnapping();
+				}
+				else if (Root.gpPenWidthVisible)
+				{
+					Root.gpPenWidthVisible = false;
+					Root.UponSubPanelUpdate = true;
+				}
+				else if (Root.Snapping == 0)
+					RetreatAndExit();
+			}
+
+			LastF4Status = retVal;
 		}
 
 		[DllImport("user32.dll")]

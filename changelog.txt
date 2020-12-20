@@ -1,8 +1,13 @@
 
-v1.0.9 (Apr. 3, 2020)
+v1.1.0 (Aug. 26, 2020)
 =================
 - Better handling of UI layout for multiple displays of unmatched DPI.
-- Fix a rare crash which occurs at startup due to path problem. 
+- Show hotkeys in button tooltips.
+- Fix a rare crash which occurs at startup due to language path problem. 
+- Prevent multiple instances of gInk.
+- Prevent multiple options windows.
+- Fix Alt+F4 causing unwanted behavior.
+- Spanish (Latin America) language.
 
 v1.0.8 (Mar. 25, 2020)
 =================

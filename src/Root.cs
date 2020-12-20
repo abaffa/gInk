@@ -461,6 +461,8 @@ namespace gInk
 
 		public void ReadOptions(string file)
 		{
+			Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+
 			if (!File.Exists(file))
 				file = AppDomain.CurrentDomain.BaseDirectory + file;
 			if (!File.Exists(file))
@@ -900,6 +902,11 @@ namespace gInk
 		*/
 		private void OnOptions(object sender, EventArgs e)
 		{
+			if (FormOptions != null)
+				return;
+			if (FormDisplay != null || FormCollection != null)
+				return;
+
 			ReadOptions("pens.ini");
 			ReadOptions("config.ini");
 			ReadOptions("hotkeys.ini");
